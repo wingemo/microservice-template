@@ -1,16 +1,25 @@
 #!/bin/bash
 
-# Bygg Docker-bilden
-echo "Bygger Docker-bilden..."
-docker build -t min_applikation -f infrastruktur/docker/Dockerfile .
+# Kör testerna först
+echo "Kör tester..."
+if ./script/run_tests.sh; then
+    echo "Testerna lyckades. Bygger och distribuerar applikationen..."
 
-# Spara Docker-bilden som en tar-fil
-echo "Sparar Docker-bilden som en tar-fil..."
-docker save -o infrastruktur/docker/min_applikation.tar min_applikation
+    # Bygg Docker-bilden
+    echo "Bygger Docker-bilden..."
+    docker build -t min_applikation -f infra/docker/Dockerfile .
 
-# Starta Kubernetes Deployment och Service
-echo "Applicerar Kubernetes Deployment och Service..."
-kubectl apply -f infrastruktur/kubernetes/deployment.yaml
-kubectl apply -f infrastruktur/kubernetes/service.yaml
+    # Spara Docker-bilden som en tar-fil
+    echo "Sparar Docker-bilden som en tar-fil..."
+    docker save -o infra/docker/min_applikation.tar min_applikation
 
-echo "Applikationen är nu distribuerad och exponerad via Kubernetes."
+    # Starta Kubernetes Deployment och Service
+    echo "Applicerar Kubernetes Deployment och Service..."
+    kubectl apply -f infra/kubernetes/deployment.yaml
+    kubectl apply -f infra/kubernetes/service.yaml
+
+    echo "Applikationen är nu distribuerad och exponerad via Kubernetes."
+else
+    echo "Testerna misslyckades. Bygg- och distributionsprocessen avbruten."
+    exit 1
+fi
