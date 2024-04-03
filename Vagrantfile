@@ -6,16 +6,13 @@ Vagrant.configure("2") do |config|
   config.vm.provision "file", source: "./src", destination: "/home/vagrant/src"
 
   config.vm.provision "shell", inline: <<-SHELL
-    # Installera Python-pip och använd requirements.txt för att installera paket
-    if sudo apt-get install -y python3-pip; then
-      echo "Python3-pip installation successful"
-    else
-      echo "Python3-pip installation failed"
-      exit 1
-    fi
-    
-    if pip3 install -r /home/vagrant/src/requirements.txt; then
-      echo "Requirements installation successful"
+    # Installera Python-pip
+    sudo apt-get update
+    sudo apt-get install -y python3-pip
+
+    # Installera paket från requirements.txt
+    if pip3 install -r /vagrant/requirements.txt; then
+      echo "Installation successful"
     else
       echo "Requirements installation failed"
       exit 1
@@ -33,7 +30,7 @@ Vagrant.configure("2") do |config|
     sudo apt-get install -y kubeadm kubelet kubectl
 
     # Navigera till mappen src
-    cd /home/vagrant/src
+    cd /vagrant/src
 
   SHELL
 end
