@@ -1,6 +1,9 @@
 Vagrant.configure("2") do |config|
   config.vm.box = "ubuntu/bionic64"
-  config.vm.network "forwarded_port", guest: 80, host: 8080 # Exempel på portforwarding för att komma åt tjänster på port 80 i den virtuella maskinen från port 8080 på värdmaskinen
+  config.vm.network "forwarded_port", guest: 80, host: 8080
+
+  # Provisionering av filer
+  config.vm.provision "file", source: "./src", destination: "/home/vagrant/src"
 
   config.vm.provision "shell", inline: <<-SHELL
     # Installera Docker
