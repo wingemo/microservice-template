@@ -5,7 +5,10 @@ Vagrant.configure("2") do |config|
   # Ange den synkroniserade mappen
   config.vm.synced_folder ".", "/vagrant", disabled: false
 
-  # Inget behov av provisionering av filer här
+  config.vm.provider "virtualbox" do |vb|
+    vb.customize ["setextradata", :id, "VBoxInternal2/SharedFoldersEnableSymlinksCreate/vagrant", "1"]
+  end
+
 
   config.vm.provision "shell", inline: <<-SHELL
     # Installera Python-pip
@@ -39,5 +42,6 @@ Vagrant.configure("2") do |config|
     echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
     sudo apt-get update
     sudo apt-get install -y kubeadm kubelet kubectl
+
   SHELL
 end
