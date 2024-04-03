@@ -12,6 +12,8 @@ Vagrant.configure("2") do |config|
     # Navigera till mappen där Vagrant-filen finns
     cd /vagrant || exit
 
+    chmod -R +x /test
+
     # Justera behörigheter för filen om det behövs
     # sudo chmod 644 "microservice-template"
 
