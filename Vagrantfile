@@ -8,6 +8,13 @@ Vagrant.configure("2") do |config|
   config.vm.provision "shell", inline: <<-SHELL
     # Installera Python-pip och använd requirements.txt för att installera paket
     sudo apt-get install -y python3-pip
+    if pip3 install -r /vagrant/requirements.txt; then
+      echo "Installation successful"
+    else
+      echo "Requirements installation failed"
+      exit 1
+    fi
+    
     pip3 install -r /vagrant/requirements.txt
 
     # Installera Docker
@@ -22,7 +29,7 @@ Vagrant.configure("2") do |config|
     sudo apt-get install -y kubeadm kubelet kubectl
 
     # Navigera till mappen src
-    cd /home/vagrant/src
+    cd vagrant
 
   SHELL
 end
