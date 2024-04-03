@@ -37,6 +37,7 @@ Vagrant.configure("2") do |config|
     sudo apt-get install -y docker.io
 
     # Add Kubernetes repository and key
+    sudo rm -rf /etc/apt/trusted.gpg.d/kubernetes.gpg
     curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
     echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
     # Update apt sources
