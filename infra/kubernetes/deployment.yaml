@@ -1,1 +1,19 @@
-
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: min-applikation-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: min-applikation
+  template:
+    metadata:
+      labels:
+        app: min-applikation
+    spec:
+      containers:
+      - name: min-applikation-container
+        image: min_applikation:latest
+        ports:
+        - containerPort: 8080
