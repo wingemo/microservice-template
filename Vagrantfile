@@ -38,10 +38,10 @@ Vagrant.configure("2") do |config|
 
     # Installera Kubernetes-kommandot 
     sudo apt-get update && sudo apt-get install -y apt-transport-https gnupg2
-    curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
-    echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
-    sudo apt-get update
-    sudo apt-get install -y kubectl
+    curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add
+    sudo apt-get install kubeadm kubelet kubectl
+    sudo apt-mark hold kubeadm kubelet kubectl
+    kubeadm version
 
     # Ändra standardkatalogen för användaren vagrant till /vagrant
     echo "cd /vagrant" >> /home/vagrant/.bashrc
