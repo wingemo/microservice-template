@@ -12,6 +12,10 @@ Vagrant.configure("2") do |config|
     sudo apt-get update
     sudo apt-get install -y python3-pip
 
+    # Lägg till standardanvändaren i Docker-gruppen
+    sudo usermod -aG docker vagrant
+
+
     # Navigera till mappen där Vagrant-filen finns
     cd /vagrant || exit
 
