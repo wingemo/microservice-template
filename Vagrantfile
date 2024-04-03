@@ -3,7 +3,7 @@ Vagrant.configure("2") do |config|
   config.vm.network "forwarded_port", guest: 80, host: 8080
 
   # Provisionering av filer
-  config.vm.provision "file", source: "./", destination: "/home/vagrant/"
+  config.vm.provision "file", source: "./", destination: "/vagrant"
 
   config.vm.provision "shell", inline: <<-SHELL
     # Installera Python-pip
@@ -11,7 +11,7 @@ Vagrant.configure("2") do |config|
     sudo apt-get install -y python3-pip
 
     # Navigera till mappen där requirements.txt finns
-    cd /home/vagrant || exit
+    cd /vagrant || exit
 
     # Installera paket från requirements.txt
     if sudo pip3 install -r requirements.txt; then
