@@ -1,1 +1,3 @@
-hello
+'''
+vagrant up
+'''
