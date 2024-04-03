@@ -37,7 +37,7 @@ Vagrant.configure("2") do |config|
     sudo apt-get install -y docker.io
 
     # Installera Kubernetes-kommandot 
-    sudo apt-get update && sudo apt-get install -y apt-transport-https gnupg2
+    sudo apt-get update && sudo apt-get install -y apt-transport-https curl
     curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add
     sudo apt-get install kubeadm kubelet kubectl
     sudo apt-mark hold kubeadm kubelet kubectl
