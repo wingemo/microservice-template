@@ -2,6 +2,9 @@ Vagrant.configure("2") do |config|
   config.vm.box = "ubuntu/bionic64"
   config.vm.network "forwarded_port", guest: 80, host: 8080
 
+  # Ange den synkroniserade mappen
+  config.vm.synced_folder ".", "/vagrant", disabled: false
+
   # Inget behov av provisionering av filer här
 
   config.vm.provision "shell", inline: <<-SHELL
@@ -13,9 +16,6 @@ Vagrant.configure("2") do |config|
     cd /vagrant || exit
 
     chmod -R +x /test
-
-    # Justera behörigheter för filen om det behövs
-    # sudo chmod 644 "microservice-template"
 
     # Installera paket från requirements.txt
     if sudo pip3 install -r requirements.txt; then
