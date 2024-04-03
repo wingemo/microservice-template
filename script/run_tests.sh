@@ -1,6 +1,7 @@
 #!/bin/bash
 
-cd min_applikation
+cd ..
+cd test
 echo "run tests..."
 python -m unittest discover -s test
 
