@@ -3,7 +3,7 @@ Vagrant.configure("2") do |config|
   config.vm.network "forwarded_port", guest: 80, host: 8080
 
   # Provisionering av filer
-  config.vm.provision "file", source: "./", destination: "/home/vagrant/"
+  config.vm.provision "file", source: ".", destination: "/home/vagrant/"
 
   config.vm.provision "shell", inline: <<-SHELL
     # Installera Python-pip
@@ -11,10 +11,10 @@ Vagrant.configure("2") do |config|
     sudo apt-get install -y python3-pip
 
     # Navigera till mappen där requirements.txt finns
-    cd /home/vagrant
+    cd /home/vagrant || exit
 
     # Installera paket från requirements.txt
-    if pip3 install -r requirements.txt; then
+    if sudo pip3 install -r requirements.txt; then
       echo "Installation successful"
     else
       echo "Requirements installation failed"
@@ -31,6 +31,5 @@ Vagrant.configure("2") do |config|
     echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
     sudo apt-get update
     sudo apt-get install -y kubeadm kubelet kubectl
-
   SHELL
 end
