@@ -16,5 +16,9 @@ Vagrant.configure("2") do |config|
     echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
     sudo apt-get update
     sudo apt-get install -y kubeadm kubelet kubectl
+
+    # Navigera till mappen src
+    cd /home/vagrant/src
+
   SHELL
 end
