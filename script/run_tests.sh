@@ -1,8 +1,5 @@
 #!/bin/bash
 
-cd ..
 cd test
 echo "run tests..."
-python -m unittest discover -s test
-
-cd ..
+python3 -m unittest discover -s .
