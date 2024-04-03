@@ -3,7 +3,7 @@ Vagrant.configure("2") do |config|
   config.vm.network "forwarded_port", guest: 80, host: 8080
 
   # Provisionering av filer
-  config.vm.provision "file", source: ".", destination: "/home/vagrant/"
+  config.vm.provision "file", source: File.dirname(__FILE__), destination: "/home/vagrant/"
 
   config.vm.provision "shell", inline: <<-SHELL
     # Installera Python-pip
