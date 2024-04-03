@@ -6,6 +6,10 @@ Vagrant.configure("2") do |config|
   config.vm.provision "file", source: "./src", destination: "/home/vagrant/src"
 
   config.vm.provision "shell", inline: <<-SHELL
+    # Installera Python-pip och använd requirements.txt för att installera paket
+    sudo apt-get install -y python3-pip
+    pip3 install -r /vagrant/requirements.txt
+
     # Installera Docker
     sudo apt-get update
     sudo apt-get install -y docker.io
