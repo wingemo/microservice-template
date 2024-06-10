@@ -1,0 +1,7 @@
+- name: CI1
+  path: configurations/ci1
+  description: Configuration for CI1
+
+- name: CI2
+  path: configurations/ci2
+  description: Configuration for CI2
